@@ -1,3 +1,10 @@
+# This Fork
+Please take to notice that this is just a fork, I'll try a way to modify this
+to my wants and needs, but it seems a bit complex.
+
+Don't expect this to make sense or to work.
+
+
 # Managing LaTeX lecture notes
 
 This repository complements my [third blog post about my note taking setup](https://castel.dev/post/lecture-notes-3).
