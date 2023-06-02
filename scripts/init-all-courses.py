@@ -4,7 +4,7 @@ from courses import Courses
 for course in Courses():
         lectures = course.lectures
         course_title = lectures.course.info["title"]
-        lines = [r'\documentclass[a4paper]{article}',
+        lines = [r'\documentclass{article}',
                  r'\input{../preamble.tex}',
                  fr'\title{{{course_title}}}',
                  r'\begin{document}',
