@@ -10,7 +10,8 @@ class Course():
         self.path = path
         self.name = path.stem
 
-        self.info = yaml.load((path / 'info.yaml').open())
+        with (path / 'info.yaml').open() as file:
+            self.info = yaml.safe_load(file)
         self._lectures = None
 
     @property
@@ -42,3 +43,4 @@ class Courses(list):
         CURRENT_COURSE_SYMLINK.unlink()
         CURRENT_COURSE_SYMLINK.symlink_to(course.path)
         CURRENT_COURSE_WATCH_FILE.write_text('{}\n'.format(course.info['short']))
+

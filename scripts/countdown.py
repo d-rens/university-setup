@@ -21,7 +21,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 from courses import Courses
-from config import USERCALENDARID
+#from config import USERCALENDARID
+userCalendarId = 'cuentadealeman787@gmail.com'
+
 
 courses = Courses()
 
@@ -72,7 +74,7 @@ def formatdd(begin, end):
     minutes = math.ceil((end - begin).seconds / 60)
 
     if minutes == 1:
-        return '1 minuut'
+        return '1 minute'
 
     if minutes < 60:
         return f'{minutes} min'
@@ -81,9 +83,9 @@ def formatdd(begin, end):
     rest_minutes = minutes % 60
 
     if hours > 5 or rest_minutes == 0:
-        return f'{hours} uur'
+        return f'{hours} hours'
 
-    return '{}:{:02d} uur'.format(hours, rest_minutes)
+    return "{}:{:02d} hours".format(hours, rest_minutes)
 
 def location(text):
     if not text:
@@ -103,7 +105,7 @@ def text(events, now):
         if nxt:
             return join(
                 summary(nxt['summary']),
-                gray('over'),
+                gray('in'),
                 formatdd(now, nxt['start']),
                 location(nxt['location'])
             )
@@ -111,24 +113,24 @@ def text(events, now):
 
     nxt = next((e for e in events if e['start'] >= current['end']), None)
     if not nxt:
-        return join(gray('Einde over'), formatdd(now, current['end']) + '!')
+        return join(gray('End in'), formatdd(now, current['end']) + '!')
 
     if current['end'] == nxt['start']:
         return join(
-            gray('Einde over'),
+            gray('End in'),
             formatdd(now, current['end']) + gray('.'),
-            gray('Hierna'),
+            gray('After this'),
             summary(nxt['summary']),
             location(nxt['location'])
         )
 
     return join(
-        gray('Einde over'),
+        gray('End in'),
         formatdd(now, current['end']) + gray('.'),
-        gray('Hierna'),
+        gray('after this'),
         summary(nxt['summary']),
         location(nxt['location']),
-        gray('na een pauze van'),
+        gray('after a break of'),
         formatdd(current['end'], nxt['start'])
     )
 
