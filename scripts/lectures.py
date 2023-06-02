@@ -43,12 +43,25 @@ class Lecture():
         self.title = title
         self.course = course
 
+    #def edit(self):
+        #subprocess.Popen([
+            #"alacritty",
+            #"-e",
+            #f"nvim {str(self.file_path)}"
+            #])
+        #print(str(self.file_path))
+
     def edit(self):
+        command = f"nvim {str(self.file_path)}"
         subprocess.Popen([
             "alacritty",
             "-e",
-            f"nvim {str(self.file_path)}"
+            "zsh",
+            "-c",
+            command
         ])
+        print(str(self.file_path))
+
 
     def __str__(self):
         return f'<Lecture {self.course.info["short"]} {self.number} "{self.title}">'
