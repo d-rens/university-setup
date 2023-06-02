@@ -139,9 +139,12 @@ class Lectures(list):
 
         return l
 
+    #def compile_master(self):
+        #result = subprocess.run(
+            #['latexmk', '-f', '-interaction=nonstopmode', str(self.master_file)],
     def compile_master(self):
         result = subprocess.run(
-            ['latexmk', '-f', '-interaction=nonstopmode', str(self.master_file)],
+            ['pdflatex', str(self.master_file)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             cwd=str(self.root)
