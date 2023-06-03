@@ -157,7 +157,7 @@ class Lectures(list):
             #['latexmk', '-f', '-interaction=nonstopmode', str(self.master_file)],
     def compile_master(self):
         result = subprocess.run(
-            ['pdflatex', str(self.master_file)],
+            ['latexmk', '-pdf', '-pvc', str(self.master_file)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             cwd=str(self.root)
