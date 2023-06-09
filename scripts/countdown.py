@@ -24,7 +24,6 @@ from courses import Courses
 #from config import USERCALENDARID
 userCalendarId = 'cuentadealeman787@gmail.com'
 
-
 courses = Courses()
 
 def authenticate():
