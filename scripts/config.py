@@ -8,5 +8,5 @@ USERCALENDARID = 'primary'
 CURRENT_COURSE_SYMLINK = Path('/home/daniel/current_course').expanduser()
 CURRENT_COURSE_ROOT = CURRENT_COURSE_SYMLINK.resolve()
 CURRENT_COURSE_WATCH_FILE = Path('/tmp/current_course').resolve()
-ROOT = Path('/home/daniel/notes/j1/').expanduser()
+ROOT = Path('/home/daniel/documents/00-09_privat/00_Git/00.01_docs/j1/').expanduser()
 DATE_FORMAT = '%d-%m-%Y'

@@ -12,18 +12,20 @@ alt + z
   zathura ~/current_course/master.pdf
 
 alt + shift + z
-  python -u ~/university-setup/scripts/rofi-courses.py
+  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-courses.py
 
 alt + shift + c
-  python -u ~/university-setup/scripts/compile-all-masters.py
+  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/compile-all-masters.py
 
 alt + l
-  python -u ~/university-setup/scripts/rofi-lectures-view.py
+  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-lectures-view.py
 
 alt + shift + l
-  python -u ~/university-setup/scripts/rofi-lectures.py
-```
+  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-courses.py
 
+super + x
+    ~/.config/sxhkd/scripts/uni-link.sh
+```
 
 
 # Managing LaTeX lecture notes
