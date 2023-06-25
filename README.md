@@ -195,3 +195,10 @@ Some utility functions
 This script updates the `master.tex` files to include all lectures and compiles
 them. I use when syncing my notes to the cloud. This way I always have access
 to my compiles notes on my phone.
+
+
+# auth error
+
+when it has problems with authentication, you can try deleting python cache,
+token pickle and restart it all, normally there should then be a google auth
+window where one can log in...
