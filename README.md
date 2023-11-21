@@ -1,36 +1,15 @@
-# Changes
-Changes to the fork origin are just that it uses nvim, pdflatex instead of
-latexmk, and worse code if i fixed things.
+## Changes
+Based on [this](https://github.com/gillescastel/university-setup).
 
-I couldn't tell you how to get it to work, it took me 12h. 
-Recommendations are to download all pips, and testing all scipts on their own.
+This fork aims to remove stuff that makes it unnecessary complex like the google calendar integration.
+But on the other hand add features to make it more effective.
 
-## My sxhkd shortcuts:
-
-```
-alt + z
-  zathura ~/current_course/master.pdf
-
-alt + shift + z
-  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-courses.py
-
-alt + shift + c
-  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/compile-all-masters.py
-
-alt + l
-  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-lectures-view.py
-
-alt + shift + l
-  python -u ~/documents/00-09_privat/01_Programme/01.01_university-setup/scripts/rofi-courses.py
-
-super + x
-    ~/.config/sxhkd/scripts/uni-link.sh
-```
+The programs used will also change from polybar and rofi to dmwblocks and dmenu, the first will not be usable outside of dwm but it's just the statusbar.
 
 
 # Managing LaTeX lecture notes
 
-This repository complements my [third blog post about my note taking setup](https://castel.dev/post/lecture-notes-3).
+This repository complements the original author's [third blog post about my note taking setup](https://castel.dev/post/lecture-notes-3).
 
 #### File structure
 
