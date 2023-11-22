@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from courses import Courses
-from rofi import rofi
+from dmenu import dmenu
 from utils import generate_short_title, MAX_LEN
 
 lectures = Courses().current.lectures
@@ -8,7 +8,7 @@ lectures = Courses().current.lectures
 sorted_lectures = sorted(lectures, key=lambda l: -l.number)
 
 options = [
-    "{number: >2}. <b>{title: <{fill}}</b> <span size='smaller'>{date}  ({week})</span>".format(
+    "{number: >2}. {title: <{fill}} {date}  ({week})".format(
         fill=MAX_LEN,
         number=lecture.number,
         title=generate_short_title(lecture.title),
@@ -18,11 +18,8 @@ options = [
     for lecture in sorted_lectures
 ]
 
-key, index, selected = rofi('Select lecture', options, [
-    '-lines', 5,
-    '-markup-rows',
-    '-kb-row-down', 'Down',
-    '-kb-custom-1', 'Ctrl+n'
+key, index, selected = dmenu('Select lecture', options, [
+    '-l', 5,
 ])
 
 if key == 0:

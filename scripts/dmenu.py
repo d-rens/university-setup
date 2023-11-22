@@ -1,18 +1,21 @@
 import subprocess
 
-def rofi(prompt, options, rofi_args=[], fuzzy=True):
+def dmenu(prompt, options, dmenu_args=[], fuzzy=True):
     optionstr = '\n'.join(option.replace('\n', ' ') for option in options)
-    args = ['rofi', '-sort', '-no-levenshtein-sort']
-    if fuzzy:
-        args += ['-matching', 'fuzzy']
-    args += ['-dmenu', '-p', prompt, '-format', 's', '-i']
-    args += rofi_args
+    args = ['dmenu']
+    #if fuzzy:
+        #args += ['-f']
+    args += ['-p', prompt]
+    args += dmenu_args
     args = [str(arg) for arg in args]
 
-
-    result = subprocess.run(args, input=optionstr, stdout=subprocess.PIPE, universal_newlines=True)
+    result = subprocess.run(args, input=optionstr, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     returncode = result.returncode
     stdout = result.stdout.strip()
+
+    if returncode != 0:
+        # If there's an error, print stderr for debugging
+        print(result.stderr)
 
     selected = stdout.strip()
     try:
