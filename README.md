@@ -9,7 +9,7 @@ The programs used will also change from polybar and rofi to dmwblocks and dmenu,
 
 # Managing LaTeX lecture notes
 
-This repository complements the original author's [third blog post about my note taking setup](https://castel.dev/post/lecture-notes-3).
+This repository complements the original author's [third blog post about his and my note taking setup](https://castel.dev/post/lecture-notes-3).
 
 #### File structure
 
@@ -69,8 +69,8 @@ which is the lecture number, date an title of the lecture. Date format is config
 
 #### `init-all-courses.py`
 
-This is the first file you should run, after creating the directory and the
-`info.yaml` file for each course. It creates all `master.tex` files.
+**This is the first file you should run, after creating the directory and the
+`info.yaml` file for each course. It creates all `master.tex` files.**
 
 #### `config.py`
 
@@ -93,7 +93,7 @@ You can also access its lectures.
 When setting this property, the script updates the `~/current_course` symlink
 to point to the current course (configurable in `config.py`)
 Furthermore, it writes the short course code to `/tmp/current_course`.
-This way, when using polybar, you can add the following to show the current course short code in your panel.
+This way, when using polybar[^1], you can add the following to show the current course short code in your panel.
 
 ```ini
 [module/currentcourse]
@@ -106,7 +106,7 @@ exec = cat /tmp/current_course
 
 #### `countdown.py`
 
-This script hooks into your calendar, which you can configure in the `config.py` file.
+This script hooks into your calendar[^2], which you can configure in the `config.py` file.
 If you're using polybar, you can use the following config:
 
 ```ini
@@ -149,7 +149,7 @@ It has a method `new_lecture` which creates a new lecture,
 compiles the `master.tex` file.
 
 #### `rofi-courses.py`
-
+[^3]
 When you run this file, it opens rofi allows you to activate a course.
 
 #### `rofi-lectures.py`
@@ -176,8 +176,7 @@ them. I use when syncing my notes to the cloud. This way I always have access
 to my compiles notes on my phone.
 
 
-# auth error
 
-when it has problems with authentication, you can try deleting python cache,
-token pickle and restart it all, normally there should then be a google auth
-window where one can log in...
+[^1]: This will be reworked to dwmblocks.
+[^2]: Will either be removed or changed to something much simpler.
+[^3]: All rofi tools are to be changed to dmenu.
