@@ -7,14 +7,15 @@ courses = Courses()
 current = courses.current
 
 try:
-    current_index = courses.index(current)
-    preselected_item = courses[current_index].info['title']
+    args = [courses.index(current)]
 except ValueError:
     args = []
 
-code, index, selected = dmenu('Select course', [c.info['title'] for c in courses], [
-    '-l', len(courses)
-] + args)
+course_titles = [c.info['title'] for c in courses]
+
+dmenu_args = ['-l', len(courses)] + args
+
+code, index, selected= dmenu('Select course', course_titles)
 
 if index >= 0:
     courses.current = courses[index]

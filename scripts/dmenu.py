@@ -1,7 +1,7 @@
 import subprocess
 
-def dmenu(prompt, options, dmenu_args=[], fuzzy=True):
-    optionstr = '\n'.join(option.replace('\n', ' ') for option in options)
+def dmenu(prompt, options, dmenu_args=[]):
+    optionstr = '\n'.join(str(option).replace('\n', ' ') for option in options)
     args = ['dmenu']
     #if fuzzy:
         #args += ['-f']
@@ -19,7 +19,7 @@ def dmenu(prompt, options, dmenu_args=[], fuzzy=True):
 
     selected = stdout.strip()
     try:
-        index = [opt.strip() for opt in options].index(selected)
+        index = [str(opt).strip() for opt in options].index(selected)
     except ValueError:
         index = -1
 
