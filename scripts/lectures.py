@@ -43,18 +43,11 @@ class Lecture():
         self.title = title
         self.course = course
 
-    #def edit(self):
-        #subprocess.Popen([
-            #"alacritty",
-            #"-e",
-            #f"nvim {str(self.file_path)}"
-            #])
-        #print(str(self.file_path))
 
     def edit(self):
         command = f"nvim {str(self.file_path)}"
         subprocess.Popen([
-            "alacritty",
+            "st",
             "-e",
             "zsh",
             "-c",
@@ -152,12 +145,9 @@ class Lectures(list):
 
         return l
 
-    #def compile_master(self):
-        #result = subprocess.run(
-            #['latexmk', '-f', '-interaction=nonstopmode', str(self.master_file)],
     def compile_master(self):
         result = subprocess.run(
-            ['latexmk', '-pdf', '-pvc', str(self.master_file)],
+            ['latexmk', '-pdf', str(self.master_file)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             cwd=str(self.root)
