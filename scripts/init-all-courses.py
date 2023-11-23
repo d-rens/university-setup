@@ -5,8 +5,8 @@ for course in Courses():
         lectures = course.lectures
         course_title = lectures.course.info["title"]
         lines = [r'\documentclass{article}',
+                 fr'\title{{{course_title}}}', # switched this and line below if any issues arise
                  r'\input{../preamble.tex}',
-                 fr'\title{{{course_title}}}',
                  r'\begin{document}',
                  r'    \maketitle',
                  r'    \tableofcontents',
