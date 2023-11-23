@@ -1,3 +1,6 @@
+# Managing LaTeX lecture notes
+This repository complements the original author's [third blog post about his and my note taking setup](https://castel.dev/post/lecture-notes-3).
+
 ## Changes
 Based on [this](https://github.com/gillescastel/university-setup).
 
@@ -8,11 +11,8 @@ The programs used will also change **from rofi to dmenu** and **from polybar
 also to dwmblocks**. dmenu will be usable under all unix variants and the dwm
 statusbar will be a script so that one can also embed it into other bars.
 
-# Managing LaTeX lecture notes
-This repository complements the original author's [third blog post about his and my note taking setup](https://castel.dev/post/lecture-notes-3).
 
-
-#### File structure
+## File structure
 
 ```
 ROOT
@@ -67,16 +67,16 @@ A lecture file contains a line
 ```
 which is the lecture number, date an title of the lecture. Date format is configurable in `config.py`.
 
-#### `init-all-courses.py`
+### `init-all-courses.py`
 **This is the first file you should run. After creating the directory and the
 `info.yaml` file for each course, it creates all `master.tex` files.**
 
-#### `config.py`
+### `config.py`
 This is where you configure the
 root folder of the file structure, and similar stuff. You can also configure
 the date format used in some places (lecture selection dialog and LaTeX files).
 
-#### `courses.py`
+### `courses.py`
 This file defines `Course` and `Courses`.
 `Courses` is a list of `Course`s in the `ROOT` folder.
 A `Course` is a python object that represents a course.
@@ -90,10 +90,10 @@ Furthermore, it writes the short course code to `/tmp/current_course`.
 This way, when using dwmblocks, polybar or most other similar statusbars you
 can add the script to show the current course short code in your panel.
 
-##### dwmblocks
+#### dwmblocks
 *will arrive shortly*
 
-##### polybar
+#### polybar
 ```ini
 [module/currentcourse]
 interval = 5
@@ -102,7 +102,7 @@ tail = true
 exec = cat /tmp/current_course
 ```
 
-#### `lectures.py`
+### `lectures.py`
 This file defines `Lectures`, the lectures for one course and `Lecture`, a
 single lecture file `lec_xx.tex`.
 A `Lecture` has a `title`, `date`, `week`, which get parsed from the LaTeX
@@ -115,25 +115,25 @@ It has a method `new_lecture` which creates a new lecture,
 `master.tex` to include the first three lectures, `compile_master` which
 compiles the `master.tex` file.
 
-#### `dmenu-courses.py`
+### `dmenu-courses.py`
 When you run this file, it opens dmenu which allows you to activate a course.
 
-#### `dmenu-lectures.py`
+### `dmenu-lectures.py`
 When you run this file, it will show you lectures of the current course.
 Selecting one opens up the file in Vim, pressing `|` creates a new lecture.
 
-#### `dmenu-lectures-view.py`
+### `dmenu-lectures-view.py`
 This opens up a rofi dialog to update which lectures are included in `master.tex`
 
 Defined options are `current lecture`, `last two lectures`, `all lectures` and `previous lectures`.
 
-#### `dmenu.py`
+### `dmenu.py`
 Wrapper function for dmenu.
 
-#### `utils.py`
+### `utils.py`
 Some utility functions.
 
-#### `compile-all-masters.py`
+### `compile-all-masters.py`
 This script updates the `master.tex` files to include all lectures and compiles
 them. I use it when syncing my notes to other devices.
 
