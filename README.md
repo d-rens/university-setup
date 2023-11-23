@@ -4,12 +4,13 @@ Based on [this](https://github.com/gillescastel/university-setup).
 This fork aims to remove stuff that makes it unnecessary complex like the google calendar integration.
 But on the other hand add features to make it more effective.
 
-The programs used will also change from polybar and rofi to dmwblocks and dmenu, the first will not be usable outside of dwm but it's just the statusbar.
-
+The programs used will also change **from rofi to dmenu** and **from polybar
+also to dwmblocks**. dmenu will be usable under all unix variants and the dwm
+statusbar will be a script so that one can also embed it into other bars.
 
 # Managing LaTeX lecture notes
-
 This repository complements the original author's [third blog post about his and my note taking setup](https://castel.dev/post/lecture-notes-3).
+
 
 #### File structure
 
@@ -43,8 +44,7 @@ Contents of  `master.tex`:
 
 ```tex
 \documentclass[]{report}
-\input{../preamble.tex}
-\DeclareMathOperator{\Res}{Res}
+\input{~/notes/preamble.tex}
 ...
 \title{Riemann surfaces}
 \begin{document}
@@ -63,26 +63,20 @@ Here `% start lectures` and `% end lectures` are important.
 
 A lecture file contains a line
 ```latex
-\lecture{1}{02-06-2023}{Introduction}
+\lecture{1}{02-06-2024}{Introduction to our current Techno-Feudalism}
 ```
 which is the lecture number, date an title of the lecture. Date format is configurable in `config.py`.
 
 #### `init-all-courses.py`
-
-**This is the first file you should run, after creating the directory and the
-`info.yaml` file for each course. It creates all `master.tex` files.**
+**This is the first file you should run. After creating the directory and the
+`info.yaml` file for each course, it creates all `master.tex` files.**
 
 #### `config.py`
-
-This is where you configure what calendar to use for the countdown script, the
+This is where you configure the
 root folder of the file structure, and similar stuff. You can also configure
 the date format used in some places (lecture selection dialog and LaTeX files).
-My university uses a system where we label the weeks in a semester from 1 to
-13, and this is what the `get_week` function does: it returns the week number
-of the given date.
 
 #### `courses.py`
-
 This file defines `Course` and `Courses`.
 `Courses` is a list of `Course`s in the `ROOT` folder.
 A `Course` is a python object that represents a course.
@@ -93,8 +87,13 @@ You can also access its lectures.
 When setting this property, the script updates the `~/current_course` symlink
 to point to the current course (configurable in `config.py`)
 Furthermore, it writes the short course code to `/tmp/current_course`.
-This way, when using polybar[^1], you can add the following to show the current course short code in your panel.
+This way, when using dwmblocks, polybar or most other similar statusbars you
+can add the script to show the current course short code in your panel.
 
+##### dwmblocks
+*will arrive shortly*
+
+##### polybar
 ```ini
 [module/currentcourse]
 interval = 5
@@ -103,80 +102,39 @@ tail = true
 exec = cat /tmp/current_course
 ```
 
-
-#### `countdown.py`
-
-This script hooks into your calendar[^2], which you can configure in the `config.py` file.
-If you're using polybar, you can use the following config:
-
-```ini
-[module/calendar]
-type = custom/script
-exec = TZ='Europe/Brussels' python3 -u ~/scripts/uni/countdown.py
-click-left = sensible-browser 'https://calendar.google.com/calendar/' -- &
-tail = true
-```
-
-It activates the course if the title of the course can be found in the description of the calendar event:
-```python
-course = next(
-    (course for course in courses
-     if course.info['title'].lower() in event['summary'].lower()),
-    None
-)
-```
-
-You can easily change this by for example adding a `calendar_name` to each
-`info.yaml` file and checking with `if course.info['calendar_name'] ==
-event['summary']` or something like that.
-
-To get it working, follow step 1 and 2 of the [Google Calendar Python
-Quickstart](https://developers.google.com/calendar/quickstart/python), and
-place `credentials.json` in the `scripts` directory.
-
 #### `lectures.py`
-
 This file defines `Lectures`, the lectures for one course and `Lecture`, a
 single lecture file `lec_xx.tex`.
 A `Lecture` has a `title`, `date`, `week`, which get parsed from the LaTeX
 source code. It also has a reference to its course.
 When calling `.edit()` on a lecture, it opens up lecture in Vim.
 
-`Lectures` is class that inherits from `list` that represents the lectures in one course.
+`Lectures` a is class that inherits from `list` that represents the lectures in one course.
 It has a method `new_lecture` which creates a new lecture,
 `update_lectures_in_master`, which when you call with `[1, 2, 3]` updates
 `master.tex` to include the first three lectures, `compile_master` which
 compiles the `master.tex` file.
 
-#### `rofi-courses.py`
-[^3]
-When you run this file, it opens rofi allows you to activate a course.
+#### `dmenu-courses.py`
+When you run this file, it opens dmenu which allows you to activate a course.
 
-#### `rofi-lectures.py`
+#### `dmenu-lectures.py`
+When you run this file, it will show you lectures of the current course.
+Selecting one opens up the file in Vim, pressing `|` creates a new lecture.
 
-When you run this file, it show you lectures of the current course.
-Selecting one opens up the file in Vim, pressing `Ctrl+N` creates a new lecture.
-
-#### `rofi-lectures-view.py`
-
+#### `dmenu-lectures-view.py`
 This opens up a rofi dialog to update which lectures are included in `master.tex`
 
-#### `rofi.py`
+Defined options are `current lecture`, `last two lectures`, `all lectures` and `previous lectures`.
 
-Wrapper function for rofi
+#### `dmenu.py`
+Wrapper function for dmenu.
 
 #### `utils.py`
-
-Some utility functions
+Some utility functions.
 
 #### `compile-all-masters.py`
-
 This script updates the `master.tex` files to include all lectures and compiles
-them. I use when syncing my notes to the cloud. This way I always have access
-to my compiles notes on my phone.
+them. I use it when syncing my notes to other devices.
 
-
-
-[^1]: This will be reworked to dwmblocks.
-[^2]: Will either be removed or changed to something much simpler.
-[^3]: All rofi tools are to be changed to dmenu.
+> issues and prs are most welcome
