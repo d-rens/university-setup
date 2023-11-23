@@ -1,0 +1,2 @@
+PyMuPDF>=1.23.6
+pynput>=1.7.6
